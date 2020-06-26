@@ -24,19 +24,20 @@ export default function App() {
 
   async function handleAddRepository(){
     const response = await api.post('/repositories', {
-      "title": "Repo challange React Native",
+      "title": "Test Positon",
       "url": "10.0.0.2:3333/app",
-      "techs": ["REACT NATIVE", "IS", "TRUE" ]
+      "techs": ["PHP GOOD", "IS", "FALSE" ]
     });
     setRepositories([...repositories, response.data]);
   }
 
   async function handleLikeRepository(id) {
     const response = await api.post(`/repositories/${id}/like`);
+    
     if(response.status === 200){
-      const updatedRepository = response.data;
-      const currentRepositories = repositories.filter(repo => repo.id !== id);
-      setRepositories([...currentRepositories, updatedRepository]);
+      const updatedRepositories = repositories.map(repo => repo.id !== id ? repo : {...repo ,likes: repo.likes + 1});
+      updatedRepositories.forEach(repo => console.log(repo));
+      setRepositories(updatedRepositories);
     }
   }
 
