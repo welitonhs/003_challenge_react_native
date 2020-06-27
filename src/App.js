@@ -36,7 +36,6 @@ export default function App() {
     
     if(response.status === 200){
       const updatedRepositories = repositories.map(repo => repo.id !== id ? repo : {...repo ,likes: repo.likes + 1});
-      updatedRepositories.forEach(repo => console.log(repo));
       setRepositories(updatedRepositories);
     }
   }
